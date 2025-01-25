@@ -1,3 +1,4 @@
 const String apiKey = '';
 const String baseUrl = 'http://api.weatherapi.com/v1';
-const String typeUrl = 'forecast.json';
+const String forecast = 'forecast.json';
+const String autoCompleteUrl = 'search.json';

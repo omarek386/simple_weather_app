@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Weather App',
         onGenerateRoute: appRouter.onGenerateRoute,
         initialRoute: Routes.homeScreen,
