@@ -27,8 +27,8 @@ A Flutter application that provides up-to-date weather information using real-ti
 
 ## Screenshots
 
-<img src="screenshots/home_screen.png" alt="Home Screen" width="300" />
-<img src="screenshots/forecast_screen.png" alt="Forecast Screen" width="300" />
+<img src="https://github.com/user-attachments/assets/f5610178-343d-4f84-af40-2440fb625904" alt="Home Screen" width="300" />
+<img src="https://github.com/user-attachments/assets/82d78664-4334-443a-adf8-91e3d6269def" alt="Forecast Screen" width="300" />
 
 ## Usage
 
