@@ -1,16 +1,44 @@
-# weather_app
+# Weather App
 
-A new Flutter project.
+A Flutter application that provides up-to-date weather information using real-time data.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Current weather display
+- Hourly and daily forecasts
+- Interactive city search **(now with auto-complete)**
+- Dynamic background changes based on conditions
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Install Flutter.
+2. Clone this repository.
+3. After cloning this repository, you must replace the placeholder API key in the code with your own.
+4. Run `flutter pub get`.
+5. Run `flutter run`.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screens
+
+| Screen   | Description                                |
+| -------- | ------------------------------------------ |
+| Home     | Shows current weather conditions.          |
+| Forecast | Lists hourly and daily weather forecasts.  |
+| Search   | Allows city lookups to view local weather. |
+
+## Screenshots
+
+<img src="screenshots/home_screen.png" alt="Home Screen" width="300" />
+<img src="screenshots/forecast_screen.png" alt="Forecast Screen" width="300" />
+
+## Usage
+
+After installing, launch the app on an emulator or physical device.
+Enter a city name or select from suggested locations to see detailed forecasts.
+
+## Contributing
+
+Feel free to open issues or submit pull requests for improvements.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

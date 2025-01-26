@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:weather_app/Routes/app_router.dart';
-import 'package:weather_app/Routes/routes.dart';
+import 'core/Routes/app_router.dart';
+import 'core/Routes/routes.dart';
+import 'core/logic/weather_cubit.dart';
 
 void main() {
   runApp(MyApp(
@@ -20,11 +22,14 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Weather App',
-        onGenerateRoute: appRouter.onGenerateRoute,
-        initialRoute: Routes.homeScreen,
+      builder: (_, child) => BlocProvider(
+        create: (context) => WeatherCubit(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Weather App',
+          onGenerateRoute: appRouter.onGenerateRoute,
+          initialRoute: Routes.homeScreen,
+        ),
       ),
     );
   }

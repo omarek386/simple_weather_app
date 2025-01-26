@@ -1,22 +1,10 @@
-class AutoComplete {
-  List<Suggestions> suggestions;
-
-  AutoComplete({required this.suggestions});
-
-  factory AutoComplete.fromJson(List json) {
-    return AutoComplete(
-      suggestions: json.map((e) => Suggestions.fromJson(e)).toList(),
-    );
-  }
-}
-
 class Suggestions {
-  String name;
-  String region;
-  String country;
-  double lat;
-  double lon;
-  String url;
+  final String name;
+  final String region;
+  final String country;
+  final double lat;
+  final double lon;
+  final String url;
 
   Suggestions({
     required this.name,

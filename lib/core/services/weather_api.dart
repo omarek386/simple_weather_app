@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:weather_app/constants/api_constants.dart';
-import 'package:weather_app/models/auto_complete.dart';
+import '../../Features/search/models/suggestions.dart';
+import '../constants/api_constants.dart';
+import '../../Features/search/models/auto_complete.dart';
 
 class WeatherApi {
   final Dio dio;
@@ -8,7 +9,7 @@ class WeatherApi {
 
   Future<Map<String, dynamic>> getWeather(String city, int days) async {
     try {
-      final Response response = await dio.get(
+      Response response = await dio.get(
         '$baseUrl/$forecast?key=$apiKey&q=$city&days=$days&aqi=no&alerts=no',
       );
       return response.data;
@@ -21,7 +22,7 @@ class WeatherApi {
 
   Future<List<Suggestions>> autoCompleteSearch(String query) async {
     try {
-      final Response response = await dio.get(
+      Response response = await dio.get(
         '$baseUrl/$autoCompleteUrl?key=$apiKey&q=$query',
       );
       List<Suggestions> suggestions =

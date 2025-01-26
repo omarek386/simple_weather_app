@@ -1,5 +1,5 @@
-import 'package:weather_app/models/forecast.dart';
-import 'package:weather_app/models/location.dart';
+import 'forecast.dart';
+import 'location.dart';
 
 class WeatherModel {
   final Location location;
