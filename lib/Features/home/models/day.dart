@@ -1,12 +1,12 @@
-import 'package:weather_app/models/condition.dart';
+import 'condition.dart';
 
 class Day {
   final double maxTemp;
   final double minTemp;
   final double avgTemp;
-  final double maxWind;
-  final num willItRain;
-  final Condition condition;
+  double maxWind;
+  num willItRain;
+  Condition condition;
 
   Day({
     required this.maxTemp,

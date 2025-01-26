@@ -17,3 +17,8 @@ class WeatherError extends WeatherState {
   final String message;
   WeatherError(this.message);
 }
+
+class AutoCompleteLoaded extends WeatherState {
+  final List<Suggestions> suggestions;
+  AutoCompleteLoaded(this.suggestions);
+}

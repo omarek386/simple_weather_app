@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_app/Routes/app_router.dart';
+import 'package:weather_app/core/Routes/app_router.dart';
 
 import 'package:weather_app/main.dart';
 

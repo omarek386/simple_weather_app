@@ -1,5 +1,5 @@
-import 'package:weather_app/models/astro.dart';
-import 'package:weather_app/models/day.dart';
+import 'astro.dart';
+import 'day.dart';
 
 class Days {
   final String date;
