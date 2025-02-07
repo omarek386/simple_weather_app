@@ -17,6 +17,16 @@ class MyContainer extends StatelessWidget {
       width: width.w,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(255, 255, 255, 0.24),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          transform: GradientRotation(0.5),
+          colors: [
+            Colors.black,
+            Colors.grey,
+            Colors.white,
+          ],
+        ),
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: child,

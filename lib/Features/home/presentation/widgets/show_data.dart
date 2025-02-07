@@ -1,68 +1,145 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:weather_app/Features/home/presentation/widgets/title_with_search.dart';
+import 'package:weather_app/core/constants/images.dart';
 import '../../models/forecast.dart';
 import '../../models/location.dart';
 import 'forecast_days.dart';
 import 'sun_rise_box.dart';
 import 'sun_set_box.dart';
-import 'title_box_widget.dart';
 import 'today_status.dart';
 
+// ignore: must_be_immutable
 class ShowData extends StatelessWidget {
-  const ShowData({
+  ShowData({
     super.key,
     required this.location,
     required this.forecast,
   });
   final Location location;
   final Forecast forecast;
+  late String currentTimeCondition;
+  late String currentTimeConditionLogo;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 20.h,
-          children: [
-            const SizedBox(
-              width: double.infinity,
-            ),
-            TitleBoxWidget(
-              city: location.name,
-              region: location.country,
-            ),
-            Image.network(
-                width: 100.w,
-                height: 100.h,
-                fit: BoxFit.fill,
-                'https:${forecast.days[0].day.condition.icon}'),
-            Text(
-              '${forecast.days[0].day.avgTemp}° C',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 48.sp),
-            ),
-            Text(
-              forecast.days[0].day.condition.text,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300,
-                  fontSize: 16.sp),
-            ),
-            TodayStatus(forecast: forecast),
-            SunRiseBox(forecast: forecast),
-            SunSetBox(forecast: forecast),
-            ForecastDays(forecast: forecast),
-            SizedBox(
-              height: 20.h,
-            ),
-          ],
+    checkTime();
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(currentTimeCondition), fit: BoxFit.cover)),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 20.h,
+            children: [
+              SizedBox(
+                height: 10.h,
+              ),
+              TitleWithSearch(),
+              const SizedBox(
+                width: double.infinity,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  width: 200.w,
+                  // height: 100.h,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(83, 142, 142, 142),
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(
+                      // begin: Alignment.topLeft,
+                      // end: Alignment.bottomRight,
+                      transform: GradientRotation(0.5),
+                      colors: [
+                        const Color.fromARGB(81, 0, 0, 0),
+                        const Color.fromARGB(99, 255, 255, 255),
+                      ],
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        currentTimeConditionLogo,
+                        width: 100.w,
+                        height: 100.h,
+                      ),
+                      Text(
+                        location.name,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.sp),
+                      ),
+                      Text(
+                        '${forecast.days[0].day.avgTemp}° C',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 38.sp),
+                      ),
+                      Text(
+                        DateFormat('EEEE')
+                            .format(DateTime.parse(location.localTime)),
+                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                      ),
+                      Text(
+                        DateFormat('dd/MM/yyyy')
+                            .format(DateTime.parse(location.localTime)),
+                        style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              ForecastDays(forecast: forecast),
+              TodayStatus(forecast: forecast),
+              SunRiseBox(forecast: forecast),
+              SunSetBox(forecast: forecast),
+              SizedBox(
+                height: 20.h,
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void checkTime() {
+    // log(DateTime.parse(location.localTime).hour.toString());
+    var date = DateTime.parse(location.localTime);
+    String day = DateFormat('EEEE').format(date);
+    log(day);
+    // log(int.parse(forecast.days[0].astro.sunset.substring(0, 2)).toString());
+    // log(int.parse(forecast.days[0].astro.sunrise.substring(0, 2)).toString());
+    if (DateTime.parse(location.localTime).hour >
+            int.parse(forecast.days[0].astro.sunset.substring(0, 2)) &&
+        DateTime.parse(location.localTime).hour <
+            int.parse(forecast.days[0].astro.sunrise.substring(0, 2))) {
+      currentTimeCondition = Images.sunSetBackground;
+      currentTimeConditionLogo = Images.sunset;
+    } else if (DateTime.parse(location.localTime).hour <
+            int.parse(forecast.days[0].astro.sunset.substring(0, 2)) &&
+        DateTime.parse(location.localTime).hour <
+            int.parse(forecast.days[0].astro.sunrise.substring(0, 2))) {
+      currentTimeCondition = Images.nightBackground;
+      currentTimeConditionLogo = Images.nightState;
+    } else {
+      currentTimeCondition = Images.dayBackground;
+      currentTimeConditionLogo = Images.clearState;
+    }
   }
 }
